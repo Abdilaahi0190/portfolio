@@ -37,7 +37,7 @@ const listProjects = async (req, res) => {
         ? await Project.find().sort({ order: 1 }).lean()
         : [...fallbackProjects].sort((a, b) => a.order - b.order);
 
-    items = items.map(enrich);
+    items = items.map(enrich).filter((p) => p.slug !== 'waafi-cargo');
 
     if (featured === 'true') items = items.filter((p) => p.featured);
     if (category) items = items.filter((p) => p.category === category);
@@ -59,7 +59,7 @@ const getProjectBySlug = async (req, res) => {
         ? await Project.findOne({ slug }).lean()
         : fallbackProjects.find((p) => p.slug === slug);
 
-    if (!item) {
+    if (!item || item.slug === 'waafi-cargo') {
       return res.status(404).json({ success: false, message: 'Project not found.' });
     }
 

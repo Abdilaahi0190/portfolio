@@ -33,13 +33,16 @@ export function useProjects({ featured } = {}) {
         const res = await fetch(`/api/projects${qs}`);
         if (!res.ok) throw new Error('Failed to fetch projects');
         const json = await res.json();
-        const data = (json.data || []).map(enrichProject);
+        const data = (json.data || [])
+          .map(enrichProject)
+          .filter((p) => p.slug !== 'waafi-cargo');
         if (!cancelled) setProjects(data);
       } catch (err) {
         if (!cancelled) {
-          const local = featured
+          const local = (featured
             ? fallbackProjects.filter((p) => p.featured)
-            : fallbackProjects;
+            : fallbackProjects
+          ).filter((p) => p.slug !== 'waafi-cargo');
           setProjects(local);
           setError(err.message);
         }
@@ -72,12 +75,25 @@ export function useProject(slug) {
         const res = await fetch(`/api/projects/${slug}`);
         if (!res.ok) throw new Error('Not found');
         const json = await res.json();
-        if (!cancelled) setProject(enrichProject(json.data));
+        const item = enrichProject(json.data);
+        if (!cancelled) {
+          if (item?.slug === 'waafi-cargo') {
+            setProject(null);
+            setError('Not found');
+          } else {
+            setProject(item);
+          }
+        }
       } catch (err) {
         if (!cancelled) {
-          const local = fallbackProjects.find((p) => p.slug === slug) || null;
-          setProject(local);
-          setError(local ? null : err.message);
+          if (slug === 'waafi-cargo') {
+            setProject(null);
+            setError('Not found');
+          } else {
+            const local = fallbackProjects.find((p) => p.slug === slug) || null;
+            setProject(local);
+            setError(local ? null : err.message);
+          }
         }
       } finally {
         if (!cancelled) setLoading(false);
