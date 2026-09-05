@@ -137,7 +137,7 @@ const projects = [
     description:
       'A domain-heavy admin platform for cargo and travel agency operations — shipments, customers, employees, payments, invoices, expenses, reporting, and more — built with React, Express, and PostgreSQL.',
     category: 'fullstack',
-    featured: true,
+    featured: false,
     image: '/projects/waafi-cargo.png',
     gallery: ['/projects/waafi-cargo.png'],
     role: 'Full-Stack Developer',

@@ -137,7 +137,7 @@ export const fallbackProjects = [
     description:
       'A domain-heavy admin platform for cargo and travel agency operations built with React, Express, and PostgreSQL.',
     category: 'fullstack',
-    featured: true,
+    featured: false,
     image: '/projects/waafi-cargo.png',
     gallery: ['/projects/waafi-cargo.png'],
     role: 'Full-Stack Developer',
