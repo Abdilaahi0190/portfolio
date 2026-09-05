@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+server/.env
+client/.env
+client/.env.local
+.DS_Store
+*.log
+client/dist/
+server/node_modules/
+client/node_modules/
+.vite/
+.idea/
+*.apk
