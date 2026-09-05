@@ -3,7 +3,7 @@ export const personal = {
   shortName: 'Abdilaahi',
   brand: 'Eng. Quule',
   title: 'Mobile-Focused Full-Stack Developer',
-  email: 'pioquule@gmail.com',
+  email: 'Clabdulaahiahmed@gmail.com',
   location: 'Somalia',
   github: 'https://github.com/Abdilaahi0190',
   githubUser: 'Abdilaahi0190',
